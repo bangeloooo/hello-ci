@@ -10,8 +10,8 @@ pipeline {
     }
 
     environment {
-        SELENIUM_REMOTE_URL = 'http://localhost:4444'
-        APP_URL = 'http://host.docker.internal:3000'
+        SELENIUM_REMOTE_URL = 'http://selenium:4444'
+        APP_URL = 'http://localhost:3000'
         JEST_JUNIT_OUTPUT_DIR = 'test-results'
         JEST_JUNIT_OUTPUT_NAME = 'junit.xml'
     }
@@ -19,28 +19,28 @@ pipeline {
     stages {
         stage('Install') {
             steps {
-                bat 'npm install'
+                sh 'npm install'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'npm test'
+                sh 'npm test'
             }
         }
 
         stage('UI Test') {
             steps {
-                bat 'start /B node src\\app.js'
-                bat 'timeout /t 5 /nobreak'
-                bat 'npx jest tests/e2e/home.test.js --reporters=default --reporters=jest-junit'
+                sh 'node src/app.js > app.log 2>&1 &'
+                sh 'sleep 5'
+                sh 'npx jest tests/e2e/home.test.js --reporters=default --reporters=jest-junit'
             }
         }
     }
 
     post {
         always {
-            junit 'test-results/junit.xml'
+            junit allowEmptyResults: true, testResults: 'test-results/junit.xml'
         }
     }
 }
