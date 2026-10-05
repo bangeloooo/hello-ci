@@ -11,7 +11,7 @@ pipeline {
 
     environment {
         SELENIUM_REMOTE_URL = 'http://selenium:4444'
-        APP_URL = 'http://localhost:3000'
+        APP_URL = 'http://Jjenkins:3000'
         JEST_JUNIT_OUTPUT_DIR = 'test-results'
         JEST_JUNIT_OUTPUT_NAME = 'junit.xml'
     }
