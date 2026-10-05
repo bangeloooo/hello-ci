@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest tests/math.test.js"
   },
   "keywords": [],
   "type": "commonjs",
-  "devDependencies": {
-    "jest": "file:...",
-    "jest-junit": "...",
-    "selenium-webdriver": "..."
-  },
   "dependencies": {
-    "express": "..."
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2",
+    "jest-junit": "^17.0.0",
+    "selenium-webdriver": "^4.50.0"
   }
 }
